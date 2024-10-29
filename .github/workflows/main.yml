@@ -1,17 +1,29 @@
-name: PHP Documentor
+name: Deploy Docs to GitHub Pages  # Nombre del flujo de trabajo
+
 on:
   push:
     branches:
-      main
+      - main  # Se ejecuta en cada push a la rama principal
+
 jobs:
-      despliegue:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: descarga phpDoc
-            run: wget https://phpdoc.org/phpDocumentor.phar
-          - name: Inicializa phpDoc
-            run:
-              chmod +x phpDocumentor.phar
-              mv phpDocumentor.phar /usr/local/bin/phpDocumentor
+  build:
+    runs-on: ubuntu-latest  # Usa la última versión de Ubuntu para ejecutar el trabajo
+    steps:
+      - name: Checkout the repository  # Paso para clonar el repositorio
+        uses: actions/checkout@v4 # Permite a GitHub Action acceder a todo el repositorio para realizar acciones
+
+      - name: Set up PHPDoc # Paso para instalar PHAR de phpDocumentor
+        run: |
+          wget https://phpdoc.org/phpDocumentor.phar
+          chmod +x phpDocumentor.phar
+          mv phpDocumentor.phar /usr/local/bin/phpDocumentor
+          
+      - name: Build the documentation
+        run: |
+          phpDocumentor run -d . -t docs/
+
+      - name: Deploy to GitHub Pages  # Publica en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # Publica en la rama gh-pages los archivos del publish_dir (más abajo)
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Token para autenticación
+          publish_dir: ./docs  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
