@@ -9,8 +9,9 @@ jobs:
         steps:
           - name: Checkout
             uses: actions/checkout@v4
-          - name: phpdoc-box-action
-            uses: phpDocumentor/phar-ga@1.0.0
+          - name: descarga phpDoc
+            run: wget https://phpdoc.org/phpDocumentor.phar
           - name: Inicializa phpDoc
             run:
-              php phpDocumentor.phar run -d ./ -t docs
+              chmod +x phpDocumentor.phar
+              mv phpDocumentor.phar /usr/local/bin/phpDocumentor
