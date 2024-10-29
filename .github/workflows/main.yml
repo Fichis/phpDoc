@@ -23,7 +23,6 @@ jobs:
           phpDocumentor run -d . -t docs/
 
       - name: Deploy to GitHub Pages  # Publica en GitHub Pages
-        uses: peaceiris/actions-main@v3 # Publica en la rama main los archivos del publish_dir (más abajo)
+        uses: JamesIves/github-pages-deploy-action@v4.6.8 # Publica en la rama main los archivos del publish_dir (más abajo)
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Token para autenticación
-          publish_dir: ./  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
+          folder: .  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
