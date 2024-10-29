@@ -25,4 +25,6 @@ jobs:
       - name: Deploy to GitHub Pages  # Publica en GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.6.8 # Publica en la rama main los archivos del publish_dir (más abajo)
         with:
-          folder: .  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
+          branch: gh-pages
+          folder: docs/  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
+          clean: true
