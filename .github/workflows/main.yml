@@ -26,4 +26,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3 # Publica en la rama gh-pages los archivos del publish_dir (más abajo)
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # Token para autenticación
-          publish_dir: ./docs  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
+          publish_dir: ./  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
